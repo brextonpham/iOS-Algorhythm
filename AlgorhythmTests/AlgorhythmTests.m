@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
+#import "MusicLibrary.h"
 
 @interface AlgorhythmTests : XCTestCase
+
+@property (nonatomic) MusicLibrary *musicLibrary;
 
 @end
 
@@ -18,23 +21,26 @@
 - (void)setUp {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
+    self.musicLibrary = [[MusicLibrary alloc] init];
 }
 
 - (void)tearDown {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
+    self.musicLibrary = nil;
     [super tearDown];
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    XCTAssert(YES, @"Pass");
+- (void)testMusicLibraryNotNil {
+    XCTAssertNotNil(self.musicLibrary, @"music library model was nil");
 }
 
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
+- (void)testLibraryArrayNotNil {
+    XCTAssertNotNil(self.musicLibrary.library, @"library array was nil");
+}
+
+- (void)testMusicLibraryArrayIsArray {
+    id library = self.musicLibrary.library;
+    XCTAssertTrue([library isKindOfClass:[NSArray class]], @"library is of class: '%@'", [library class]);
 }
 
 @end
